@@ -37,5 +37,5 @@ exports.dumpData = async (data) => {
 };
 
 exports.getAllVideoes = async (req, res) => {
-  console.log(req);
+  console.log(req.query);
 };
