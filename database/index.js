@@ -1,8 +1,5 @@
-const { Sequelize } = require('sequelize');
-
-const { DATABASE, DB_USER, PASSWORD } = require('../config/index');
-
 import Sequelize from 'sequelize';
+import { DATABASE, DB_USER, PASSWORD } from '../config/index.js';
 
 export const sequelize = new Sequelize(
   DATABASE, // db name,
@@ -20,5 +17,3 @@ export const sequelize = new Sequelize(
     logging: true,
   }
 );
-
-module.exports = sequelize;
