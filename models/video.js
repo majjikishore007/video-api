@@ -1,7 +1,7 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../database/database.js';
+const DataTypes = require('sequelize');
+const { sequelize } = require('../database/index.js');
 
-export const Video = sequelize.define(
+exports.Video = sequelize.define(
   'video',
   {
     id: {
@@ -9,7 +9,7 @@ export const Video = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    tittle: {
+    title: {
       type: DataTypes.STRING,
     },
     description: {
