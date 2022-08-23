@@ -1,16 +1,10 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import app from './app.js';
+import { sequelize } from './database/index.js';
 
-const app = express();
+const main = async () => {
+  await sequelize.sync({ force: false });
+  app.listen(4000);
+  console.log('Server on port 4000');
+};
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Server is running on  port 3000');
-});
-
-module.exports = app;
+main();

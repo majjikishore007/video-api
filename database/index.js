@@ -2,22 +2,23 @@ const { Sequelize } = require('sequelize');
 
 const { DATABASE, DB_USER, PASSWORD } = require('../config/index');
 
-// connecting db on local
-const sequelize = new Sequelize(DATABASE, DB_USER, PASSWORD, {
-  host: 'localhost',
-  port: 5432,
-  dialect: 'postgres',
-});
+import Sequelize from 'sequelize';
 
-sequelize.sync();
-
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection with DB established');
-  } catch (err) {
-    console.error('Unable to connect with DB', err);
+export const sequelize = new Sequelize(
+  DATABASE, // db name,
+  DB_USER, // username
+  PASSWORD, // password
+  {
+    host: 'localhost',
+    dialect: 'postgres',
+    // pool: {
+    //   max: 5,
+    //   min: 0,
+    //   require: 30000,
+    //   idle: 10000,
+    // },
+    logging: true,
   }
-})();
+);
 
 module.exports = sequelize;
