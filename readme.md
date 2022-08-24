@@ -21,8 +21,7 @@ To make an API to fetch latest videos sorted in reverse chronological order of t
 - Then `cd video-api`
 - Run `npm install ` to install all the node modules 
 - Get an `api-key` form the google console
-- set up the `.env` reference `.env.example`   
+- set up the `.env` reference `.env.example`(refere the docker-compse.yaml for db credentials)  
 - Make sure to install `docker` and `docke-compose`
 - Run `sudo docker-compose up --build -d` which builds the containers and starts the project
 - To stop the containers Run `docker-compose down`
-
