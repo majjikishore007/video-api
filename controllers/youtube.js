@@ -31,11 +31,64 @@ exports.dumpData = async (data) => {
     try {
       const saved = await video.save();
     } catch (error) {
-      console.log('message', error);
+      return {
+        message: err.message || 'Some error occurred ',
+      };
     }
   });
 };
 
+const getPagination = (page, size) => {
+  const limit = size ? +size : 3;
+  const offset = page ? page * limit : 0;
+  return { limit, offset };
+};
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: videos } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+  return { totalItems, videos, totalPages, currentPage };
+};
+
 exports.getAllVideoes = async (req, res) => {
-  console.log(req.query);
+  const { page, size } = req.query;
+  const { limit, offset } = getPagination(page, size);
+  Video.findAndCountAll({
+    limit,
+    offset,
+    order: [['publishing_datetime', 'DESC']],
+  })
+    .then((data) => {
+      const response = getPagingData(data, page, limit);
+      res.send(response);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || 'Some error occurred ',
+      });
+    });
+};
+
+exports.getByTitleAndDesc = async (req, res) => {
+  const { title, description } = req.query;
+  if (!title && !description) {
+    res.send.json({
+      message: 'query parameters missing',
+    });
+  }
+  Video.findOne({
+    where: {
+      title: title,
+      description: description,
+    },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(404).send({
+        message: err.message || 'coud not found the data',
+      });
+    });
 };
