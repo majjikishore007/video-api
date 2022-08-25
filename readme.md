@@ -14,7 +14,7 @@ To make an API to fetch latest videos sorted in reverse chronological order of t
      `queryparams - title,description`
     - To search the stored videos using their title and description.
 
-## Setting up the 
+## Setting up the repo
 
 - Make sure to  have  `node v16 or higher` installed 
 - Clone the repo `git clone https://github.com/majjikishore007/video-api.git `or `git clone  git@github.com:majjikishore007/video-api.git` 
